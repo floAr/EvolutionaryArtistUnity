@@ -1,0 +1,32 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+Texture2D<float4> T1;
+Texture2D<float4> T2;
+RWStructuredBuffer<uint> Error;
+int BucketSize;
+
+float getDiff(uint3 e1, uint3 e2) {
+	uint rmean = (e1.r + e2.r) / 2;
+	uint r = e1.r - e2.r;
+	uint g = e1.g - e2.g;
+	uint b = e1.b - e2.b;
+	return sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
+}
+
+int float4ToAbsInt(float4 a, float4 b) {
+	uint result = getDiff(uint3(a.r*255,a.g*255,a.b*255), uint3(b.r * 255, b.g * 255, b.b * 255));
+	/*uint result = 0;
+	result += abs(a.r * 255 - b.r * 255)*3;
+	result += abs(a.g * 255 - b.g * 255)*4;
+	result += abs(a.b * 255 - b.b * 255)*2*/;
+	return result;
+}
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	InterlockedAdd(Error[id.x % BucketSize], float4ToAbsInt(T1[id.xy],T2[id.xy]));
+}

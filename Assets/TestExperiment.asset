@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19afed5e1edf5124c8ba16a5110b22d2, type: 3}
+  m_Name: TestExperiment
+  m_EditorClassIdentifier: 
+  Name: Test
+  BrushPack: {fileID: 18700000, guid: 0d4b424c1d4dbac48b1803fa59a1fe83, type: 2}
+  startSize: 0.25
+  minSize: 0.01
+  sizeDecay_percent: 0.02
+  Iterations: 150
+  CanvasColor: {r: 0.96760225, g: 0, b: 1, a: 1}
+  Source: {fileID: 2800000, guid: f5276050ee7252b489570783af4f7eaf, type: 3}
+  NumberOfStrokes: 7
+  ColorValue: {fileID: 11400000, guid: ef9200dda2dbac84fb32657b607ea99f, type: 2}
